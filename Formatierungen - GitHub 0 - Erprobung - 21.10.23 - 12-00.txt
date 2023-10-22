@@ -1,0 +1,215 @@
+Formatierungen - Struktur - Entwurt - vom 20.10.23 um 14-00.txt
+
+Nur über diesen Entwurf erfolgt mit gpt-4 32k ein Verständigungs-Gespräch, mit dem diese 
+Formatierungs-Anweisung optimiert werden soll.
+
+
+
+Die Kommentare eines Diskussions-Protokolls müssen formatiert werden. 
+Das Protokoll folgt im Anschluss an diese Anweisung:
+
+## Formatierungsanweisung für Kommentare, die als txt-Dateien in Diskussionsprotokollen vorliegen.
+
+### Ziel
+
+Das Hauptziel dieser Anweisung ist die standardisierte Formatierung von Kommentaren aus Diskussionsprotokollen. Die folgenden Schritte sollen dabei befolgt werden:
+
+### Allgemeine Anforderungen
+
+- Vermeiden Sie das Hinzufügen von Überschriften oder Nummern zum formatierten Text.
+
+### Extraktion der Kommentar-ID
+
+1. Die Kommentar-ID ist in der ersten Zeile des Kommentars zu finden und beginnt mit einem `#` gefolgt von einer Zahl.
+2. Extrahiere diese ID und stellen sie im Format `#[Zahl]` dar.
+
+### Extraktion des Datums 
+
+1. Das Datum des Kommentars befindet sich in der zweiten Zeile des Kommentars.
+2. Extrahiere dieses Datum und stelle es im Format `[Datum]` dar.
+
+### Extraktion des Namens des Kommentators
+
+1. Der Name des Kommentators befindet sich in der dritten Zeile des Kommentars. 
+2. Entfernen Sie den Ausdruck `[Offline]`, falls er vorhanden ist.
+
+### Einbeziehung des Geschlechts
+
+1. Das Geschlecht des Kommentators sollte, falls im Originaltext vorhanden oder anderweitig bekannt, eingefügt werden.
+2. Verwenden Sie 'm' für männlich und 'w' für weiblich.
+
+#### Geschlechterliste der Kommentar-Autoren:
+
+- buckj - m
+- catthmary - w
+- Fenja - w
+- condor - m
+- happynow - w
+- Heiner Müller - m
+- Isalena - w
+- merlin - m
+- old friend - m
+- Otto - m
+- orsola - w
+- Papillon - w
+- randylgabrie - m
+- Samurai - w
+- Sensi - w
+- Vielhirnvielehr - m
+- Woschof - m
+- yellow flow - m
+- Zarte Kraft - w
+
+### Extraktion des Kommentartextes
+
+1. **Identifikation des Beginns des Kommentartextes**
+    - Der eigentliche Kommentartext beginnt nach der 6. Zeile des unformatierten Original-Kommentars.
+    - Überprüfe, ob die 7. Zeile eine Leerzeile ohne Zeichen ist. Wenn ja, entferne sie und gehe zur nächsten Zeile, falls auch diese eine Leerzeile ohne Zeichen ist, entferne sie und gehe zur nächsten Zeile, falls auch diese eine Leerzeile ohne Zeichen ist, entferne sie und gehe zur nächsten Zeile. Fahre so fort, bis du auf die erste Zeile stößt, die Text enthält. Das ist die erste Kommentar-Text-Zeile. 
+
+2. **Identifikation des Endes des Kommentartextes**
+    - Der Kommentartext endet genau am Anfang eines Textblocks im Endbereich des Kommentars, der durch Ausdrücke der folgenden Art identifiziert und in dieser Anweisung als "Anhang" wird: 
+
+"gern angeschaut!gern angeschaut! 
+Danke!Danke! 
+Heiner Müller hat sich bedankt! 
+gelesengelesen 
+Heiner Müller hat Text gelesen. 
+sehr schön!sehr schön! 
+Folgende Mitglieder finden das sehr schön!: happynow und catthmary 
+Heiner Müller hat das gern angeschaut! 
+happynow hat sich bedankt!"
+
+3. **Absatzstruktur und Leerzeilen**
+    - Suche im Kommentartext nach Leerzeilen. 
+    - Verdoppele Einzel-Leerzeilen und ersetze Mehrfach-Leerzeilen durch zwei Leerzeilen.
+    - Die Absatzstruktur des Originalkommentars muss erhalten bleiben. 
+    - Der Kommentartext darf unter keinen Umständen gekürzt oder in einer zusammengefassten Form dargestellt werden.
+
+4. **Entfernung des Anhangs**
+    - Der Anhang ist der letzte Textbereich des Kommentars und besteht aus Floskeln der folgenden Art: "Danke!Danke!", "gelesengelesen", etc.
+    - Entferne ihn vollständig und alle sonstigen nicht relevanten Informationen danach, bis zum Ende des Kommentars.
+
+5. **Beibehaltung der Semantik und Inhalte**
+    - Verändere weder die Semantik noch die Inhalte des Kommentartextes. 
+    - Achte auf Beiträge, die mit "@" beginnen.
+    - In Klammern gesetzte Ausdrücke wie "(Text)" innerhalb des Kommentartextes gehören auch zum Kommentar-Text.
+
+#### Algorithmus für GPT-4 zur Erkennung des Kommentartextes
+
+- Beginne die Textextraktion gemäß den oben genannten Regeln.
+- Durchsuche den Bereich des eigentlichen Kommentartextes nach Abschnitten mit Leerzeilen. Ersetze sie in jedem Fall durch 2 Leerzeilen.
+
+### Formatierung der Zitate
+
+1. **Identifizieren Sie Zitate im Originalkommentar.**
+   
+#### Verbesserter Algorithmus für die Erkennung von Zitaten
+
+- **Anweisung für GPT-4**: 
+  - Der Beginn eines Zitats wird durch die Formel "Zitat von [Name des Zitat-Autors] im Beitrag #[Zahl]:" identifiziert. 
+  - Diese einleitende Floskel ist Bestandteil des Zitates. 
+  - Diese einleitende Floskel wird nicht in "" gesetzt. 
+  - Der Zitattext beginnt im Anschluss an diese Floskel.
+  - Der Algorithmus sollte den Text nach dem Zitatbeginn bis zum nächsten Zeilenumbruch erfassen. 
+  - Danach sollte er prüfen, ob der nächste Textblock (bis zum nächsten Zeilenumbruch) Leerzeichen, Satzzeichen oder andere nicht-alphanumerische Zeichen enthält. Wenn ja, wird dieser Textblock als Teil des Zitats betrachtet.
+
+#### Erkennung des Zitatendes durch Zeilenumbrüche und Leerzeilen
+
+- **Anweisung für GPT-4**:
+  - Das Ende eines Zitats wird durch einen Zeilenumbruch oder durch eine oder zwei aufeinanderfolgende Leerzeilen signalisiert oder durch Beides.
+  - Wenn nach dem Zitattext ein Zeilenumbruch oder eine oder zwei Leerzeilen folgen oder Beides, betrachte das Zitat als abgeschlossen und fahre mit der weiteren Textverarbeitung fort. 
+
+- **Wenn ein Zitat nicht korrekt identifiziert oder formatiert wird, generiere eine Fehlermeldung: "Fehler in Kommentar #[Zahl]: Das Zitat konnte nicht korrekt identifiziert oder formatiert werden."**
+
+2. **Entfernen Sie das `#` vor der Zahl im Zitat.**
+3. **Fügen Sie ein `:` nach der Zahl im Zitat ein.**
+4. **Fügen Sie einen Zeilenumbruch nach dem `:` ein.**
+5. **Setze nur den Zitat-Text, ab dem Zeichen `:`, in "".**
+6. **Führe nach dem Zitattext einen Zeilenumbruch durch und anschließend eine Leerzeile ein.**
+
+### Darstellung der Extraktionen
+
+1. Die Darstellung der extrahierten Informationen darf nur in der folgenden Struktur bestehen:
+
+```
+#[Zahl]
+Datum: [Datum]
+Autor: [Name des Kommentators] 
+Geschlecht: [m oder w]
+Kommentar: 
+[Kommentartext]
+
+**Mehrere formatierte Kommentare sollten nur durch zwei Leerzeilen voneinander getrennt werden.**
+
+### Endgültige Überprüfung
+
+- Gehen Sie die gesamte formatierte Ausgabe durch, um sicherzustellen, dass alle Anforderungen erfüllt sind.
+---
+plaintext
+Ausgabe-Anweisung: 
+Results only! 
+Keine einleitenden Bemerkungen.
+Keine Kommentar-Überschriften. 
+Keine Trenn-Zeichen zwischen den Kommentaren. 
+Keine abschließenden Bewerkungen!
+
+
+
+
+### Checkliste für die Formatierung von Kommentaren aus Diskussionsprotokollen
+
+1. **Extraktion der Kommentar-ID**
+   - Finden Sie die Kommentar-ID in der ersten Zeile des Kommentars.
+   - Stellen Sie die ID im Format `#[Zahl]` dar.
+
+2. **Extraktion des Datums**
+   - Finden Sie das Datum des Kommentars in der zweiten Zeile.
+   - Stellen Sie das Datum im Format `[Datum]` dar.
+
+3. **Extraktion des Namens des Kommentators**
+   - Finden Sie den Namen des Kommentators in der dritten Zeile.
+   - Entfernen Sie den Ausdruck `[Offline]`, falls vorhanden.
+
+4. **Einbeziehung des Geschlechts**
+   - Fügen Sie das Geschlecht des Kommentators ein, falls bekannt.
+   - Verwenden Sie 'm' für männlich und 'w' für weiblich.
+
+5. **Extraktion des Kommentartextes**
+   - Beginnen Sie die Textextraktion genau nach der sechsten Zeile des unformatierten Original-Kommentars.
+   - Entfernen Sie den Anhang und alle sonstigen nicht relevanten Informationen danach bis zum Ende des Kommentars.
+   - Behalten Sie die Strukturierung der Absätze bei.
+   - Achte auf die Vorschrift mit den 2 Leerzeilen zwischen den Abschnitten.
+
+6. **Zitat-Erkennung und -Formatierung**
+   - Identifizieren Sie Zitate im Kommentartext. 
+   - Identifiziere die einleitende Floskel.
+   - Überprüfen Sie, ob das Zitat durch einen Zeilenumbruch oder durch eine oder zwei Leerzeilen oder beides abgeschlossen ist. 
+   - Überprüfe, ob am Ende des Zitates ein Zeilenumbruch und eine Leerzeile eingefügt ist. 
+
+6. **6.1 Fehlererkennung und -meldung**
+ - Wenn ein Zitat nicht korrekt identifiziert oder formatiert wird, sollte eine Fehlermeldung generiert werden: "Fehler in Kommentar #[Zahl]: Das Zitat konnte nicht korrekt identifiziert oder formatiert werden."
+   
+7. **Darstellung der Extraktionen**
+   - Strukturieren Sie die extrahierten Informationen wie folgt:
+     ```
+     #[Zahl]
+     Datum: [Datum]
+     Autor: [Name des Kommentators]
+     Geschlecht: [m oder w]
+     Kommentar:
+     [Kommentartext]
+     ```
+8. **Endgültige Überprüfung**
+   - Gehen Sie die gesamte formatierte Ausgabe durch, um sicherzustellen, dass alle Anforderungen erfüllt sind.
+---
+9. Ausgabe-Anweisung: 
+Results only! 
+Keine einleitenden Bemerkungen.
+Keine Kommentar-Überschriften. 
+Keine Trenn-Zeichen zwischen den Kommentaren. 
+Keine abschließenden Bewerkungen!
+
+10. Gib die formatierten Kommentare alle in einem Fenster aus. 
+
+Und das ist das Protokoll der zu formatierenden Kommentare: 
+
